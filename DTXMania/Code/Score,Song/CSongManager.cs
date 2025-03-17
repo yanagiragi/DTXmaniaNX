@@ -7,6 +7,7 @@ using System.IO;
 using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace DTXMania
 {
@@ -136,7 +137,15 @@ namespace DTXMania
 		//-----------------
 		public void tSearchSongsAndCreateList( string str基点フォルダ, bool b子BOXへ再帰する )
 		{
-			this.tSearchSongsAndCreateList( str基点フォルダ, b子BOXへ再帰する, this.listSongRoot, null );
+			try
+			{
+				this.tSearchSongsAndCreateList(str基点フォルダ, b子BOXへ再帰する, this.listSongRoot, null);
+			}
+			catch (Exception e)
+			{
+				Trace.TraceError(e.Message);
+				MessageBox.Show(e.Message, "Exception occurs when search songs", MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1);
+			}
 		}
 		private void tSearchSongsAndCreateList( string str基点フォルダ, bool b子BOXへ再帰する, List<CSongListNode> listノードリスト, CSongListNode node親 )
 		{
